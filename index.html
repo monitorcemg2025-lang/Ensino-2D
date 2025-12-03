@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Godot 2D - Dodge the Creeps (Passo a Passo)</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <img src="assets/godot-logo.png" alt="Godot Engine" class="logo">
+        <h1>Crie Seu Primeiro Jogo 2D no Godot 4</h1>
+        <p>Tutorial completo em português – Dodge the Creeps</p>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>Bem-vindo(a)!</h2>
+            <p>Neste tutorial você vai criar um jogo 2D completo onde o jogador se move e evita inimigos que aparecem na tela.</p>
+            <p><strong>Tempo estimado:</strong> 1–2 horas | <strong>Nível:</strong> Iniciante</p>
+            <a href="https://godotengine.org/download" target="_blank" class="btn">Baixar Godot 4 (Grátis)</a>
+            <a href="https://github.com/gdquest-demos/godot-4-dodge-the-creeps/archive/refs/heads/main.zip" class="btn secondary">Baixar Assets do Jogo</a>
+        </section>
+
+        <div class="screenshots">
+            <img src="assets/screenshot1.jpg" alt="Jogo em ação">
+            <img src="assets/screenshot2.jpg" alt="Editor Godot">
+            <img src="assets/screenshot3.jpg" alt="Inimigos spawnando">
+        </div>
+
+        <section>
+            <h2>Passo a Passo Completo</h2>
+            <ol>
+                <li><strong>Criar o projeto</strong> → New Project → 2D → Nome: DodgeTheCreeps</li>
+                <li><strong>Configurar janela</strong> → Project Settings → Display → Window → Size: 480x720</li>
+                <li><strong>Criar Player</strong> → CharacterBody2D + Sprite2D + CollisionShape2D</li>
+                <li><strong>Script do Player</strong> (GDScript completo incluso abaixo)</li>
+                <li><strong>Criar Inimigo (Mob)</strong> → RigidBody2D com animação</li>
+                <li><strong>Spawn aleatório</strong> com Path2D + Timer</li>
+                <li><strong>HUD com pontuação</strong> e Game Over</li>
+                <li><strong>Testar e exportar!</strong></li>
+            </ol>
+        </section>
+
+        <section class="code">
+            <h2>Script do Player (player.gd)</h2>
+            <pre><code>extends CharacterBody2D
+
+@export var speed: int = 400
+var screen_size: Vector2
+
+func _ready():
+    screen_size = get_viewport_rect().size
+
+func _physics_process(delta):
+    var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+    velocity = direction * speed
+    move_and_slide()
+    
+    # Limitar à tela
+    position = position.clamp(Vector2.ZERO, screen_size)</code></pre>
+        </section>
+
+        <p class="center"><strong>Tutorial completo com todos os passos, scripts e assets:</strong><br>
+        <a href="https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html" target="_blank" class="btn big">
+            Tutorial Oficial Godot (Melhor versão em português)
+        </a></p>
+    </main>
+
+    <footer>
+        <p>Feito com carinho para a comunidade brasileira de Godot</p>
+        <p>Deploy automático via GitHub + Render</p>
+    </footer>
+</body>
+</html>
